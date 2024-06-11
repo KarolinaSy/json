@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCrear Tarjetas de Usuario</title>
+    <style>
+        .tarjeta {
+            border: 1px solid  goldenrod;
+            padding:5px;
+            border-radius: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="contenedor">
+
+
+    </div>
+
+    <script>
+
+        // este json devuelve una lista /de usuario) porque comienza y termina en [ ]
+
+        const dataUsuarios = `[{
+    "nombre": "Juan Pérez",
+    "edad": 28,
+    "correo": "juan.perez@example.com"
+  },
+  {
+    "nombre": "Ana Gómez",
+    "edad": 34,
+    "correo": "ana.gomez@example.com"
+  },
+  {
+    "nombre": "Luis Torres",
+    "edad": 23,
+    "correo": "luis.torres@example.com"
+  }]`;
+
+        console.log("JSON ES:", dataUsuarios);
+        const listaUsuarios = JSON.parse(dataUsuarios);
+
+        console.log("OBJ JS ES:", listaUsuarios);
+        console.log("NOMBRE 1 ES:", listaUsuarios[0].nombre);
+
+        const divContenedor = document.querySelector("#contenedor");
+
+        listaUsuarios.forEach(usuario => {
+
+            const { nombre, edad, correo } = usuario;
+
+
+            divContenedor.innerHTML += `<div class="tarjeta">
+                                    <h3>${usuario.nombre}</h3>
+                                    <p> Edad:${usuario.edad}</p>
+                                    <p> Correo:${usuario.correo}</p>
+                                   </div>`;
+        });
+
+    </script>
+
+
+</body>
+
+</html>

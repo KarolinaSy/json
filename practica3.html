@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Películas</title>
+
+    <style>
+        .contenedor img {
+            max-width: 200px;
+        }
+
+        .contenedor {
+            background: rgb(227, 222, 222);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--Lista de peliculas-->
+    <div class="contenedor"></div>
+
+    <!--datos de peliculas-->
+    <div class="pelicula"></div>
+
+    <div class="peli"></div>
+
+
+
+    <script>
+        const dataPeliculas = `[
+  {
+    "titulo": "Inception",
+    "genero": "Ciencia Ficción",
+    "puntaje": 8.8,
+    "descripcion": "Un ladrón que roba secretos corporativos a través del uso de tecnología de sueños es dado la tarea inversa de plantar una idea en la mente de un CEO.",
+    "imagen": "https://via.placeholder.com/150"
+  },
+  {
+    "titulo": "The Dark Knight",
+    "genero": "Acción",
+    "puntaje": 9.0,
+    "descripcion": "Cuando el Joker emerge como el nuevo villano del caos, Batman debe aceptar uno de los mayores desafíos psicológicos y físicos para combatir la injusticia.",
+    "imagen": "https://via.placeholder.com/150"
+  },
+  {
+    "titulo": "Interstellar",
+    "genero": "Aventura",
+    "puntaje": 8.6,
+    "descripcion": "Un equipo de exploradores viaja a través de un agujero de gusano en el espacio en un intento de asegurar la supervivencia de la humanidad.",
+    "imagen": "https://via.placeholder.com/150"
+  }
+]`
+
+        const listaPeliculas = JSON.parse(dataPeliculas);
+        const divContenedor = document.querySelector(".contenedor");
+        const divPelicula = document.querySelector(".pelicula");
+        //console.log(listaPeliculas);
+        //console.log(listaPeliculas[2].genero);
+
+        listaPeliculas.forEach(pelicula => {
+            console.log(pelicula.titulo);
+
+            divContenedor.innerHTML += `<h1>${pelicula.titulo}</h1>
+                                        <h3>${pelicula.genero}</h3>
+                                        <h3>${pelicula.puntaje}</h3>
+                                        <p>${pelicula.descripcion}</p>
+                                        <img src="${pelicula.imagen}"alt="${pelicula.titulo}">`;
+        });
+
+        const pelis = document.querySelectorAll(".peli");
+
+        pelis.forEach(peli => {
+
+            peli.addEventListener("click", (event) => {
+                const divPelicula = event.target;
+                console.log(divPelicula);
+
+            });
+        })
+
+
+
+    </script>
+
+
+</body>
+
+</html>
