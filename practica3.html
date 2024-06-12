@@ -7,27 +7,59 @@
     <title>Galería de Películas</title>
 
     <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+        .main {
+            display: flex;
+        }
+
         .contenedor img {
             max-width: 200px;
         }
 
         .contenedor {
+            flex-grow: 1;
             background: rgb(227, 222, 222);
+            display: flex;
+            flex-wrap: wrap;
         }
+
+        .pelicula {
+            max-width: 200px;
+            background-color: aqua;
+            min-height: 200px;
+        }
+        .pelicula img{
+            max-width: 150px;
+        }
+
+        .peliCard {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        
     </style>
 </head>
 
 <body>
 
-    <!--Lista de peliculas-->
-    <div class="contenedor"></div>
+    <main>
 
-    <!--datos de peliculas-->
-    <div class="pelicula"></div>
+        <!--Lista de peliculas-->
+        <div class="contenedor"></div>
 
-    <div class="peli"></div>
+        <!--datos de peliculas-->
+        <div class="pelicula"></div>
 
+        <div class="peli"></div>
 
+    </main>
 
     <script>
         const dataPeliculas = `[
@@ -60,26 +92,59 @@
         //console.log(listaPeliculas);
         //console.log(listaPeliculas[2].genero);
 
-        listaPeliculas.forEach(pelicula => {
+        listaPeliculas.forEach((pelicula, indice) => {
             console.log(pelicula.titulo);
+            console.log(indice); // en que posicion del array esta
 
-            divContenedor.innerHTML += `<h1>${pelicula.titulo}</h1>
-                                        <h3>${pelicula.genero}</h3>
-                                        <h3>${pelicula.puntaje}</h3>
-                                        <p>${pelicula.descripcion}</p>
-                                        <img src="${pelicula.imagen}"alt="${pelicula.titulo}">`;
+
+        //  //crear div utilizando TEMPLATE STRINGS
+        //     divContenedor.innerHTML += `<div class= "peliCard"  onClick="seleccionarPelicula(${indice})"</div>
+        //                                 <h2>${pelicula.titulo}</h2>
+
+        //                                 <img src="${pelicula.imagen}"alt="${pelicula.titulo}">`;
+
+
+        const peliculaDiv = document.createElement('div');
+        peliculaDiv.classList.add("peliCard");
+
+        peliculaDiv.innerHTML=
+        `<h2>${pelicula.titulo}</h2>
+        <img src="${pelicula.imagen}" alt="${pelicula.titulo}" />`;
+
+        divContenedor.appendChild(peliculaDiv);
+
+        peliculaDiv.addEventListener("click", ()=>{
+            seleccionarPelicula(indice);
         });
+        }); //fin del forEach
 
-        const pelis = document.querySelectorAll(".peli");
 
-        pelis.forEach(peli => {
+        function seleccionarPelicula(num) {
+            // alert("mostrar  pelicula:",+ num);
+            console.log(listaPeliculas[num]);
+            const pelicula = listaPeliculas[num];
 
-            peli.addEventListener("click", (event) => {
-                const divPelicula = event.target;
-                console.log(divPelicula);
+       
+            divPelicula.innerHTML = `<h3>${pelicula.titulo}</h3>
+           <ul>
+           <li>genero:<b>${pelicula.genero}<b></li>
+           <li>puntaje:<b>${pelicula.puntaje}<b></li>
+           </ul>
+           <p>${pelicula.descripcion}</p>`;
 
-            });
-        })
+         }
+
+        // const pelis = document.querySelectorAll(".peliCard");
+
+        // pelis.forEach(peli => {
+
+        //     peli.addEventListener("click", (event) => {
+        //         const divPelicula = event.target.closest(".peliCard");
+
+        //         console.log(divPelicula);
+
+        //     });
+        // })
 
 
 
